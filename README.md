@@ -1,16 +1,20 @@
-# bintar_sepuh
+# PENSUDIS
 
-A new Flutter project.
+This is a project based from administration government project to control the flow of letter in and out.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+Firstly, you need to clone this repo.
+Then, you must look at the `asset` folder itself. Inside, you should find a file named `.env.example`
 
-A few resources to get you started if this is your first Flutter project:
+After that, use this command to get the packages :
+```bash
+flutter pub get --no-example
+```
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+<br>
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+If everything is done, try this command to run it :
+```bash
+flutter run
+```
