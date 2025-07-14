@@ -72,23 +72,25 @@ class _SplashScreenState extends State<SplashScreen>
 
   void _startAnimationSequence() async {
     // Detik ke-2: Munculin text PENSUDIS
-    await Future.delayed(Duration(milliseconds: 2000));
+    await Future.delayed(Duration(milliseconds: 1300));
     setState(() {
       showText = true;
     });
     _textFadeController.forward();
 
     // Detik ke-3: Background dissolve + loading muncul + marble animation starts
-    await Future.delayed(Duration(milliseconds: 3000));
+    await Future.delayed(Duration(milliseconds: 1800));
+    _backgroundDissolveController.forward();
+    _marbleController.repeat();
+
+    await Future.delayed(Duration(milliseconds: 2500));
     setState(() {
       showLoading = true;
-    });
-    _backgroundDissolveController.forward();
+    }); // Start marble animation and repeat
     _loadingController.forward();
-    _marbleController.repeat(); // Start marble animation and repeat
 
     // Detik ke-4: Loading berubah jadi tombol
-    await Future.delayed(Duration(milliseconds: 4000));
+    await Future.delayed(Duration(milliseconds: 5000));
     setState(() {
       showButton = true;
     });
@@ -103,34 +105,32 @@ class _SplashScreenState extends State<SplashScreen>
     super.dispose();
   }
 
-  void _goToLoginPage() {
-    void _goToLoginPage() async {
-      // Step 1: Arrow pop ke atas
-      setState(() {
-        _arrowTop = -8; // naik 8 pixel
-      });
-      await Future.delayed(Duration(milliseconds: 150));
+  void _goToLoginPage() async {
+    // Step 1: Arrow pop ke atas
+    setState(() {
+      _arrowTop = -8; // naik 8 pixel
+    });
+    await Future.delayed(Duration(milliseconds: 150));
 
-      // Step 2: Balik ke tengah
-      setState(() {
-        _arrowTop = 0;
-      });
+    // Step 2: Balik ke tengah
+    setState(() {
+      _arrowTop = 0;
+    });
 
-      // Step 3: Tunggu 1 detik, baru geser ke kanan
-      await Future.delayed(Duration(milliseconds: 100));
+    // Step 3: Tunggu 1 detik, baru geser ke kanan
+    await Future.delayed(Duration(milliseconds: 100));
 
-      setState(() {
-        _arrowLeft = 24; // geser ke kanan 24px
-      });
+    setState(() {
+      _arrowLeft = 24; // geser ke kanan 24px
+    });
 
-      // Optional: delay sebelum pindah halaman
-      await Future.delayed(Duration(milliseconds: 300));
+    // Optional: delay sebelum pindah halaman
+    await Future.delayed(Duration(milliseconds: 300));
 
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => LoginPage()),
-      );
-    }
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => LoginPage()),
+    );
   }
 
   @override
@@ -221,18 +221,14 @@ class _SplashScreenState extends State<SplashScreen>
                         ? ElevatedButton(
                             onPressed: _goToLoginPage,
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.white,
+                              backgroundColor: Colors.lightBlueAccent,
                               foregroundColor: Colors.black,
                               padding: EdgeInsets.symmetric(
-                                horizontal: 75,
+                                horizontal: 45,
                                 vertical: 13,
                               ),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10),
-                                side: BorderSide(
-                                  color: Colors.black87,
-                                  width: 2,
-                                ),
                               ),
                               elevation: 8,
                             ),
@@ -243,25 +239,28 @@ class _SplashScreenState extends State<SplashScreen>
                                 Text(
                                   'Get Started',
                                   style: TextStyle(
-                                    fontSize: 14,
+                                    fontSize: 15,
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
-                                SizedBox(width: 4),
-                                Stack(
-                                  alignment: Alignment.center,
-                                  children: [
-                                    AnimatedPositioned(
-                                      duration: Duration(milliseconds: 50),
-                                      top: _arrowTop,
-                                      left: _arrowLeft,
-                                      child: Icon(
-                                        Icons.arrow_right_rounded,
-                                        size: 36,
-                                        color: Colors.black,
+                                SizedBox(
+                                  width: 45,
+                                  height: 40,
+                                  child: Stack(
+                                    alignment: Alignment.center,
+                                    children: [
+                                      AnimatedPositioned(
+                                        duration: Duration(milliseconds: 150),
+                                        top: _arrowTop,
+                                        left: _arrowLeft,
+                                        child: Icon(
+                                          Icons.arrow_right_rounded,
+                                          size: 36,
+                                          color: Colors.black,
+                                        ),
                                       ),
-                                    ),
-                                  ],
+                                    ],
+                                  ),
                                 ),
                               ],
                             ),
