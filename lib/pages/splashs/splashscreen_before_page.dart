@@ -12,13 +12,14 @@ class _SplashScreenState extends State<SplashScreen>
   late AnimationController _textFadeController;
   late AnimationController _backgroundDissolveController;
   late AnimationController _loadingController;
-  late AnimationController _marbleController; // New controller for marble animation
-  
+  late AnimationController
+  _marbleController; // New controller for marble animation
+
   late Animation<double> _textFadeAnimation;
   late Animation<double> _backgroundDissolveAnimation;
   late Animation<double> _loadingAnimation;
   late Animation<double> _marbleAnimation; // New animation for marble effect
-  
+
   bool showText = false;
   bool showLoading = false;
   bool showButton = false;
@@ -26,7 +27,7 @@ class _SplashScreenState extends State<SplashScreen>
   @override
   void initState() {
     super.initState();
-    
+
     // Setup animation controllers
     _textFadeController = AnimationController(
       duration: Duration(milliseconds: 2000),
@@ -58,9 +59,10 @@ class _SplashScreenState extends State<SplashScreen>
     _loadingAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
       CurvedAnimation(parent: _loadingController, curve: Curves.easeInOut),
     );
-    _marbleAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
-      CurvedAnimation(parent: _marbleController, curve: Curves.linear),
-    );
+    _marbleAnimation = Tween<double>(
+      begin: 0.0,
+      end: 1.0,
+    ).animate(CurvedAnimation(parent: _marbleController, curve: Curves.linear));
 
     // Start animation sequence
     _startAnimationSequence();
@@ -161,7 +163,7 @@ class _SplashScreenState extends State<SplashScreen>
                     child: Text(
                       'PENSUDIS',
                       style: TextStyle(
-                        fontSize: 32,
+                        fontSize: 36,
                         fontWeight: FontWeight.bold,
                         color: Colors.white,
                         letterSpacing: 3,
@@ -197,20 +199,35 @@ class _SplashScreenState extends State<SplashScreen>
                               backgroundColor: Colors.white,
                               foregroundColor: Colors.black,
                               padding: EdgeInsets.symmetric(
-                                horizontal: 32,
-                                vertical: 12,
+                                horizontal: 75,
+                                vertical: 13,
                               ),
                               shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(25),
+                                borderRadius: BorderRadius.circular(10),
+                                side: BorderSide(
+                                  color: Colors.black87,
+                                  width: 2,
+                                ),
                               ),
                               elevation: 8,
                             ),
-                            child: Text(
-                              'Selanjutnya',
-                              style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                              ),
+                            child: Row(
+                              mainAxisSize: MainAxisSize
+                                  .min, // Agar row nggak melebar lebih dari yang diperlukan
+                              children: [
+                                Text(
+                                  'Get Started',
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+
+                                Icon(
+                                  Icons.arrow_right_rounded, // Icon arrow ke kanan
+                                  size: 36, // Ukuran icon bisa disesuaikan
+                                ),
+                              ],
                             ),
                           )
                         : Column(
@@ -252,8 +269,7 @@ class MarbleFluidPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    final paint = Paint()
-      ..style = PaintingStyle.fill;
+    final paint = Paint()..style = PaintingStyle.fill;
 
     // Create multiple fluid layers with different gradients
     _drawFluidLayer(canvas, size, paint, 0.0, 0.4);
@@ -261,9 +277,15 @@ class MarbleFluidPainter extends CustomPainter {
     _drawFluidLayer(canvas, size, paint, 0.6, 0.2);
   }
 
-  void _drawFluidLayer(Canvas canvas, Size size, Paint paint, double offset, double opacity) {
+  void _drawFluidLayer(
+    Canvas canvas,
+    Size size,
+    Paint paint,
+    double offset,
+    double opacity,
+  ) {
     final path = Path();
-    
+
     // Create gradient shader
     paint.shader = LinearGradient(
       colors: [
@@ -283,46 +305,53 @@ class MarbleFluidPainter extends CustomPainter {
 
     // Animated offset for flowing effect
     final animatedOffset = (animationValue + offset) * 2 * math.pi;
-    
+
     // Create flowing background
     path.addRect(Rect.fromLTWH(0, 0, size.width, size.height));
-    
+
     // Add flowing organic shapes
     for (int i = 0; i < 5; i++) {
-      double x = size.width * (0.1 + i * 0.2) + 
-                 math.cos(animatedOffset + i) * 50;
-      double y = size.height * (0.2 + i * 0.15) + 
-                 math.sin(animatedOffset + i * 0.7) * 30;
-      
+      double x =
+          size.width * (0.1 + i * 0.2) + math.cos(animatedOffset + i) * 50;
+      double y =
+          size.height * (0.2 + i * 0.15) +
+          math.sin(animatedOffset + i * 0.7) * 30;
+
       _addFlowingBlob(path, x, y, animatedOffset + i);
     }
-    
+
     // Add wave-like patterns
     final wavePath = Path();
     wavePath.moveTo(0, size.height * 0.3);
-    
+
     for (double x = 0; x <= size.width; x += 5) {
-      double y = size.height * 0.4 + 
-                 math.sin((x / 60) + animatedOffset) * 40 +
-                 math.cos((x / 100) + animatedOffset * 0.7) * 25;
+      double y =
+          size.height * 0.4 +
+          math.sin((x / 60) + animatedOffset) * 40 +
+          math.cos((x / 100) + animatedOffset * 0.7) * 25;
       wavePath.lineTo(x, y);
     }
-    
+
     wavePath.lineTo(size.width, size.height);
     wavePath.lineTo(0, size.height);
     wavePath.close();
-    
+
     path.addPath(wavePath, Offset.zero);
-    
+
     // Apply opacity for layering effect
     paint.color = Colors.white.withOpacity(opacity);
     canvas.drawPath(path, paint);
   }
 
-  void _addFlowingBlob(Path path, double centerX, double centerY, double animatedOffset) {
+  void _addFlowingBlob(
+    Path path,
+    double centerX,
+    double centerY,
+    double animatedOffset,
+  ) {
     final blobPath = Path();
     final points = <Offset>[];
-    
+
     // Create organic blob shape
     for (int i = 0; i < 8; i++) {
       double angle = (i / 8) * 2 * math.pi;
@@ -331,7 +360,7 @@ class MarbleFluidPainter extends CustomPainter {
       double y = centerY + math.sin(angle) * radius;
       points.add(Offset(x, y));
     }
-    
+
     // Create smooth curves between points
     if (points.isNotEmpty) {
       blobPath.moveTo(points[0].dx, points[0].dy);
@@ -344,7 +373,7 @@ class MarbleFluidPainter extends CustomPainter {
       }
       blobPath.close();
     }
-    
+
     path.addPath(blobPath, Offset.zero);
   }
 

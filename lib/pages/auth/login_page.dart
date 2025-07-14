@@ -5,7 +5,8 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('PENSUDIS App'),
+        title: Text('PENSUDIS'),
+        titleTextStyle: TextStyle(),
         backgroundColor: Colors.blue.shade600,
       ),
       body: Container(
@@ -15,7 +16,7 @@ class LoginPage extends StatelessWidget {
             end: Alignment.bottomRight,
             colors: [
               Color(0xFFE8F4FD),
-              Color(0xFFFFC1CC),
+              Color(0xFFFFFFFF),
             ],
           ),
         ),
