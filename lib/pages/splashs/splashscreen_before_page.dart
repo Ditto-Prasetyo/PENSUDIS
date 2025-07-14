@@ -23,6 +23,8 @@ class _SplashScreenState extends State<SplashScreen>
   bool showText = false;
   bool showLoading = false;
   bool showButton = false;
+  double _arrowTop = 0;
+  double _arrowLeft = 0;
 
   @override
   void initState() {
@@ -102,10 +104,33 @@ class _SplashScreenState extends State<SplashScreen>
   }
 
   void _goToLoginPage() {
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(builder: (context) => LoginPage()),
-    );
+    void _goToLoginPage() async {
+      // Step 1: Arrow pop ke atas
+      setState(() {
+        _arrowTop = -8; // naik 8 pixel
+      });
+      await Future.delayed(Duration(milliseconds: 150));
+
+      // Step 2: Balik ke tengah
+      setState(() {
+        _arrowTop = 0;
+      });
+
+      // Step 3: Tunggu 1 detik, baru geser ke kanan
+      await Future.delayed(Duration(milliseconds: 100));
+
+      setState(() {
+        _arrowLeft = 24; // geser ke kanan 24px
+      });
+
+      // Optional: delay sebelum pindah halaman
+      await Future.delayed(Duration(milliseconds: 300));
+
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => LoginPage()),
+      );
+    }
   }
 
   @override
@@ -222,10 +247,21 @@ class _SplashScreenState extends State<SplashScreen>
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
-
-                                Icon(
-                                  Icons.arrow_right_rounded, // Icon arrow ke kanan
-                                  size: 36, // Ukuran icon bisa disesuaikan
+                                SizedBox(width: 4),
+                                Stack(
+                                  alignment: Alignment.center,
+                                  children: [
+                                    AnimatedPositioned(
+                                      duration: Duration(milliseconds: 50),
+                                      top: _arrowTop,
+                                      left: _arrowLeft,
+                                      child: Icon(
+                                        Icons.arrow_right_rounded,
+                                        size: 36,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ],
                             ),
