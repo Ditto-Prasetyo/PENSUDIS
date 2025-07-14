@@ -12,7 +12,7 @@ void main() async {
     print("Aplikasi dijalankan di Web.");
   } else if (Platform.isWindows || Platform.isLinux || Platform.isMacOS || Platform.isFuchsia) {
     // Hanya di platform desktop yang mendukung window_size
-    setWindowTitle('Alumni Finder');
+    setWindowTitle('PENSUDIS');
     var windowInfo = await getWindowInfo();
     var size = windowInfo.frame.size;
     setWindowMinSize(
