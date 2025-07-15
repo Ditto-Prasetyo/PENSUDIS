@@ -1,3 +1,4 @@
+import 'package:bintar_sepuh/pages/auth/login_page.dart';
 import 'package:bintar_sepuh/pages/splashs/test.dart';
 import 'package:flutter/foundation.dart'; // untuk kIsWeb
 import 'package:bintar_sepuh/pages/splashs/splashscreen_before_page.dart';
@@ -34,7 +35,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: SplashScreen(), debugShowCheckedModeBanner: false,
+      home: LoginPage(), debugShowCheckedModeBanner: false,
     );
   }
 }

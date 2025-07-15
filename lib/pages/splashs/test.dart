@@ -1,71 +1,135 @@
 import 'package:flutter/material.dart';
 
-class ArrowPopAndSlide extends StatefulWidget {
+class TestPage extends StatefulWidget {
   @override
-  _ArrowPopAndSlideState createState() => _ArrowPopAndSlideState();
+  _TestPageState createState() => _TestPageState();
 }
 
-class _ArrowPopAndSlideState extends State<ArrowPopAndSlide> {
-  double _top = 0;
-  double _left = 0;
-  bool _animating = false;
-
-  void _startAnimation() async {
-    if (_animating) return; // Biar ga bisa spam klik
-    setState(() {
-      _animating = true;
-    });
-
-    // POP ke atas dikit
-    setState(() {
-      _top = -10; // naik 10px
-    });
-
-    await Future.delayed(Duration(milliseconds: 200));
-
-    // Balik ke posisi normal
-    setState(() {
-      _top = 0;
-    });
-
-    // Tunggu 1 detik sebelum geser kanan
-    await Future.delayed(Duration(milliseconds: 250));
-
-    // Geser ke kanan cepat
-    setState(() {
-      _left = 150; // geser kanan 150px
-    });
-
-    // Reset biar bisa animasi ulang
-    await Future.delayed(Duration(milliseconds: 800));
-    setState(() {
-      _left = 0;
-      _animating = false;
-    });
-  }
+class _TestPageState extends State<TestPage> {
+  final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Arrow Pop + Slide")),
-      body: Center(
-        child: GestureDetector(
-          onTap: _startAnimation,
-          child: Stack(
-            children: [
-              Container(width: 200, height: 80, color: Colors.grey.shade300),
-              AnimatedPositioned(
-                duration: Duration(milliseconds: 200),
-                top: _top,
-                left: _left,
-                child: Icon(
-                  Icons.arrow_right_rounded,
-                  size: 50,
-                  color: Colors.blue,
+      backgroundColor: Colors.grey[50],
+      body: Padding(
+        padding: const EdgeInsets.all(24.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            // Username TextField
+            Container(
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(12),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.1),
+                    spreadRadius: 1,
+                    blurRadius: 8,
+                    offset: Offset(0, 2),
+                  ),
+                ],
+              ),
+              child: TextField(
+                controller: _usernameController,
+                decoration: InputDecoration(
+                  hintText: 'Username',
+                  hintStyle: TextStyle(
+                    color: Colors.grey[400],
+                    fontSize: 16,
+                  ),
+                  prefixIcon: Icon(
+                    Icons.person_outline,
+                    color: Colors.grey[400],
+                    size: 20,
+                  ),
+                  border: InputBorder.none,
+                  contentPadding: EdgeInsets.symmetric(
+                    horizontal: 16,
+                    vertical: 16,
+                  ),
+                ),
+                style: TextStyle(
+                  fontSize: 16,
+                  color: Colors.grey[700],
                 ),
               ),
-            ],
-          ),
+            ),
+            
+            SizedBox(height: 16),
+            
+            // Password TextField
+            Container(
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(12),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.1),
+                    spreadRadius: 1,
+                    blurRadius: 8,
+                    offset: Offset(0, 2),
+                  ),
+                ],
+              ),
+              child: TextField(
+                controller: _passwordController,
+                obscureText: true,
+                decoration: InputDecoration(
+                  hintText: '**********',
+                  hintStyle: TextStyle(
+                    color: Colors.grey[400],
+                    fontSize: 16,
+                  ),
+                  prefixIcon: Icon(
+                    Icons.lock_outline,
+                    color: Colors.grey[400],
+                    size: 20,
+                  ),
+                  border: InputBorder.none,
+                  contentPadding: EdgeInsets.symmetric(
+                    horizontal: 16,
+                    vertical: 16,
+                  ),
+                ),
+                style: TextStyle(
+                  fontSize: 16,
+                  color: Colors.grey[700],
+                ),
+              ),
+            ),
+            
+            SizedBox(height: 24),
+            
+            // Login Button
+            Container(
+              width: double.infinity,
+              height: 56,
+              child: ElevatedButton(
+                onPressed: () {
+                  // Handle login action
+                  print('Login pressed');
+                  print('Username: ${_usernameController.text}');
+                  print('Password: ${_passwordController.text}');
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Color(0xFF00D4AA), // Warna hijau mint
+                  foregroundColor: Colors.white,
+                  elevation: 4,
+                  shadowColor: Color(0xFF00D4AA).withOpacity(0.3),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(28), // Circular button
+                  ),
+                ),
+                child: Icon(
+                  Icons.arrow_forward,
+                  size: 24,
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );
