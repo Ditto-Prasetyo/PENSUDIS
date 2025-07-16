@@ -1,4 +1,4 @@
-import 'package:bintar_sepuh/pages/auth/login_page.dart';
+import 'package:bintar_sepuh/pages/auth/login.dart';
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
 
