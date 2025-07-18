@@ -1,5 +1,4 @@
 import 'package:bintar_sepuh/pages/auth/login.dart';
-import 'package:bintar_sepuh/pages/splashs/test.dart';
 import 'package:flutter/foundation.dart'; 
 import 'package:flutter/material.dart';
 import 'dart:io' show Platform;
