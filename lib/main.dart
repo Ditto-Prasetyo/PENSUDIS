@@ -1,4 +1,5 @@
 import 'package:bintar_sepuh/pages/auth/login.dart';
+import 'package:bintar_sepuh/pages/splashs/splashscreen_before_page.dart';
 import 'package:flutter/foundation.dart'; 
 import 'package:flutter/material.dart';
 import 'dart:io' show Platform;
@@ -33,7 +34,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: LoginPage(), debugShowCheckedModeBanner: false,
+      home: SplashScreen(), debugShowCheckedModeBanner: false,
     );
   }
 }

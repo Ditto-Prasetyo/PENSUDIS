@@ -1,10 +1,12 @@
+import 'package:bintar_sepuh/pages/auth/login.dart';
+import 'package:bintar_sepuh/pages/auth/register.dart';
 import 'package:flutter/material.dart';
 import 'package:bintar_sepuh/pages/auth/components/curved-left-shadow.dart';
 import 'package:bintar_sepuh/pages/auth/components/curved-left.dart';
 import 'package:bintar_sepuh/pages/auth/components/curved-right-shadow.dart';
 import 'package:bintar_sepuh/pages/auth/components/curved-right.dart';
 
-class Register extends StatelessWidget {
+class RegisterCred extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -26,15 +28,15 @@ class Register extends StatelessWidget {
                     alignment: Alignment.centerRight,
                     padding: const EdgeInsets.only(
                       right: 30.0,
-                      top: 160.0,
+                      top: 100.0,
                       bottom: 50.0
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(bottom: 55.0),
+                    padding: const EdgeInsets.only(bottom: 55.0, left: 35.0),
                     child: Text(
-                      "Register",
-                      style: TextStyle(fontSize: 37.0, fontWeight: FontWeight.w700),
+                      "Register Cred",
+                      style: TextStyle(fontSize: 37.0, fontWeight: FontWeight.w700, letterSpacing: 2),
                     ),
                   ),
                   Stack(
@@ -66,7 +68,7 @@ class Register extends StatelessWidget {
                                   vertical: 15.0,
                                 ),
                                 icon: Icon(
-                                  Icons.person_outline,
+                                  Icons.people_alt_outlined,
                                   size: 24.0,
                                 ),
                                 hintText: "Name",
@@ -87,7 +89,7 @@ class Register extends StatelessWidget {
                                   vertical: 15.0,
                                 ),
                                 icon: Icon(
-                                  Icons.lock_outline,
+                                  Icons.phone_android,
                                   size: 24.0,
                                 ),
                                 hintText: "Phone Number",
@@ -105,10 +107,10 @@ class Register extends StatelessWidget {
                               style: TextStyle(fontSize: 16.0),
                               decoration: InputDecoration(
                                 contentPadding: const EdgeInsets.symmetric(
-                                  vertical: 15.0,
+                                  vertical: 15.0, horizontal: -2.0,
                                 ),
                                 icon: Icon(
-                                  Icons.alternate_email,
+                                  Icons.home,
                                   size: 26.0,
                                 ),
                                 hintText: "Address",
@@ -140,10 +142,33 @@ class Register extends StatelessWidget {
                               )
                             ],
                           ),
+                          child: MouseRegion(cursor: SystemMouseCursors.click, child: GestureDetector(onTap: () {
+                            Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => LoginPage()),
+        );
+                          },
                           child: Icon(
                             Icons.arrow_upward,
                             size: 40.0,
                             color: Colors.white,
+                          ),
+                          ),),
+                        ),
+                      ),
+                      Container(
+                        alignment: Alignment.centerLeft,
+                        padding: EdgeInsets.only(top: 225.0, left: 30.0),
+                        child: MouseRegion(
+                          cursor: SystemMouseCursors.click,
+                          child: GestureDetector(
+                            onTap: () {
+                              Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => Register()),
+        );
+                            },
+                            child: Text("Back", style: TextStyle(fontSize: 18.0, color: Colors.deepOrangeAccent, fontWeight: FontWeight.w700, letterSpacing: 2 ),),
                           ),
                         ),
                       ),

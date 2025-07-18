@@ -1,4 +1,5 @@
 import 'package:bintar_sepuh/pages/auth/login.dart';
+import 'package:bintar_sepuh/pages/auth/register_cred.dart';
 import 'package:flutter/material.dart';
 import 'package:bintar_sepuh/pages/auth/components/curved-left-shadow.dart';
 import 'package:bintar_sepuh/pages/auth/components/curved-left.dart';
@@ -141,7 +142,11 @@ class Register extends StatelessWidget {
                               )
                             ],
                           ),
-                          child: MouseRegion(cursor: SystemMouseCursors.click, child: GestureDetector(child: Icon(
+                          child: MouseRegion(cursor: SystemMouseCursors.click, child: GestureDetector(
+                            onTap: () {
+                              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => RegisterCred()));
+                            },
+                            child: Icon(
                             Icons.arrow_upward,    
                             size: 40.0,
                             color: Colors.white,

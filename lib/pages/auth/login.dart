@@ -5,6 +5,7 @@ import 'package:bintar_sepuh/pages/auth/components/curved-left-shadow.dart';
 import 'package:bintar_sepuh/pages/auth/components/curved-left.dart';
 import 'package:bintar_sepuh/pages/auth/components/curved-right-shadow.dart';
 import 'package:bintar_sepuh/pages/auth/components/curved-right.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -17,6 +18,21 @@ class LoginPageState extends State<LoginPage> {
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   bool _isPasswordVisible = false;
+
+  Future<void> _launchWhatsApp() async {
+  final adminNumber = "6285161015745";
+  final message = "Selamat pagi Admin, saya lupa password akun saya. Mohon bantuannya. Terima kasih.";
+  final url = "https://wa.me/$adminNumber?text=${Uri.encodeComponent(message)}";
+
+  if (await canLaunchUrl(Uri.parse(url))) {
+    await launchUrl(Uri.parse(url), mode: LaunchMode.externalApplication);
+  } else {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text('Gagal membuka WhatsApp')),
+    );
+  }
+}
+
 
   @override
   Widget build(BuildContext context) {
@@ -137,9 +153,7 @@ class LoginPageState extends State<LoginPage> {
                       vertical: 25.0,
                       horizontal: 30.0,
                     ),
-                    child: MouseRegion(cursor: SystemMouseCursors.click, child: GestureDetector(onTap: () {
-                      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Register()));
-                    },
+                    child: MouseRegion(cursor: SystemMouseCursors.click, child: GestureDetector(onTap: _launchWhatsApp,
                     child: Text(
                       "Forgot?",
                       style: TextStyle(
