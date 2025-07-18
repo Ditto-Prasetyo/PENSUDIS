@@ -1,3 +1,4 @@
+import 'package:bintar_sepuh/pages/auth/login.dart';
 import 'package:flutter/material.dart';
 import 'package:bintar_sepuh/pages/auth/components/curved-left-shadow.dart';
 import 'package:bintar_sepuh/pages/auth/components/curved-left.dart';
@@ -34,7 +35,7 @@ class Register extends StatelessWidget {
                     padding: const EdgeInsets.only(bottom: 55.0),
                     child: Text(
                       "Register",
-                      style: TextStyle(fontSize: 37.0, fontWeight: FontWeight.w700),
+                      style: TextStyle(fontSize: 37.0, fontWeight: FontWeight.w700, letterSpacing: 2),
                     ),
                   ),
                   Stack(
@@ -140,10 +141,26 @@ class Register extends StatelessWidget {
                               )
                             ],
                           ),
-                          child: Icon(
+                          child: MouseRegion(cursor: SystemMouseCursors.click, child: GestureDetector(child: Icon(
                             Icons.arrow_upward,    
                             size: 40.0,
                             color: Colors.white,
+                          ),),),
+                        ),
+                      ),
+                      Container(
+                        alignment: Alignment.centerLeft,
+                        padding: EdgeInsets.only(top: 225.0, left: 30.0),
+                        child: MouseRegion(
+                          cursor: SystemMouseCursors.click,
+                          child: GestureDetector(
+                            onTap: () {
+                              Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => LoginPage()),
+        );
+                            },
+                            child: Text("Login", style: TextStyle(fontSize: 18.0, color: Colors.deepOrangeAccent, fontWeight: FontWeight.w700, letterSpacing: 2 ),),
                           ),
                         ),
                       ),

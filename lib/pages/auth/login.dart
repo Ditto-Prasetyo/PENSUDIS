@@ -1,4 +1,5 @@
 import 'package:bintar_sepuh/pages/auth/register.dart';
+import 'package:bintar_sepuh/pages/views/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:bintar_sepuh/pages/auth/components/curved-left-shadow.dart';
 import 'package:bintar_sepuh/pages/auth/components/curved-left.dart';
@@ -40,7 +41,7 @@ class LoginPageState extends State<LoginPage> {
                       "Login",
                       style: TextStyle(
                         fontSize: 37.0,
-                        fontWeight: FontWeight.w700,
+                        fontWeight: FontWeight.w700, letterSpacing: 2,
                       ),
                     ),
                   ),
@@ -117,11 +118,15 @@ class LoginPageState extends State<LoginPage> {
                               ),
                             ],
                           ),
+                          child: MouseRegion(cursor: SystemMouseCursors.click, child: GestureDetector(onTap: () {
+                             Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomePage()));
+                          },
                           child: Icon(
                             Icons.arrow_forward,
                             size: 40.0,
                             color: Colors.white,
                           ),
+                          ),),
                         ),
                       ),
                     ],
@@ -132,6 +137,9 @@ class LoginPageState extends State<LoginPage> {
                       vertical: 25.0,
                       horizontal: 30.0,
                     ),
+                    child: MouseRegion(cursor: SystemMouseCursors.click, child: GestureDetector(onTap: () {
+                      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Register()));
+                    },
                     child: Text(
                       "Forgot?",
                       style: TextStyle(
@@ -140,29 +148,34 @@ class LoginPageState extends State<LoginPage> {
                         fontWeight: FontWeight.w700,
                         letterSpacing: 2,
                       ),
-                    ),
+                    )), ),
+                    
                   ),
-                  Container(
-                    alignment: Alignment.centerLeft,
-                    padding: const EdgeInsets.only(left: 25.0, top: 30.0),
-                    child: GestureDetector(
-                      onTap: () {
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(builder: (context) => Register()),
-                        );
-                      },
-                      child: Text(
-                        "Register",
-                        style: TextStyle(
-                          fontSize: 18.0,
-                          color: Colors.deepOrangeAccent,
-                          fontWeight: FontWeight.w700,
-                          letterSpacing: 2,
-                        ),
-                      ),
-                    ),
-                  ),
+                 Container(
+                  alignment: Alignment.centerLeft,
+                  padding: EdgeInsets.only(left: 25.0, top: 30.0),
+  child: MouseRegion(
+    cursor: SystemMouseCursors.click,
+    child: GestureDetector(
+      onTap: () {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => Register()),
+        );
+      },
+      child: Text(
+        "Register",
+        style: TextStyle(
+          fontSize: 18.0,
+          color: Colors.deepOrangeAccent,
+          fontWeight: FontWeight.w700,
+          letterSpacing: 2,
+        ),
+      ),
+    ),
+  ),
+)
+
                 ],
               ),
             ),
