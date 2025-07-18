@@ -18,21 +18,76 @@ class LoginPageState extends State<LoginPage> {
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   bool _isPasswordVisible = false;
+  final _Passwordcontroller = TextEditingController();
+  final _Usernamecontroller = TextEditingController();
+  final int _maxlengthPassword = 8;
+  final int _maxlengthUsername = 12;
 
   Future<void> _launchWhatsApp() async {
-  final adminNumber = "6285161015745";
-  final message = "Selamat pagi Admin, saya lupa password akun saya. Mohon bantuannya. Terima kasih.";
-  final url = "https://wa.me/$adminNumber?text=${Uri.encodeComponent(message)}";
+    final adminNumber = "6285161015745";
+    final message =
+        "Selamat pagi Admin, saya lupa password akun saya. Mohon bantuannya. Terima kasih.";
+    final url =
+        "https://wa.me/$adminNumber?text=${Uri.encodeComponent(message)}";
 
-  if (await canLaunchUrl(Uri.parse(url))) {
-    await launchUrl(Uri.parse(url), mode: LaunchMode.externalApplication);
-  } else {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text('Gagal membuka WhatsApp')),
-    );
+    if (await canLaunchUrl(Uri.parse(url))) {
+      await launchUrl(Uri.parse(url), mode: LaunchMode.externalApplication);
+    } else {
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text('Gagal membuka WhatsApp')));
+    }
   }
-}
 
+  void _checkLengthPassword(String value) {
+    if (value.length > _maxlengthPassword) {
+      // langsung potong text-nya biar gak nambah
+      _Passwordcontroller.text = value.substring(0, _maxlengthPassword);
+      _Passwordcontroller.selection = TextSelection.fromPosition(
+        TextPosition(offset: _Passwordcontroller.text.length),
+      );
+
+      // munculin popup error
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: Text('Maksimum Karakter Terlewati'),
+          content: Text('Input tidak boleh lebih dari $_maxlengthPassword karakter.'),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: Text('Oke'),
+            ),
+          ],
+        ),
+      );
+    }
+  }
+
+  void _checkLengthUsername(String value) {
+    if (value.length > _maxlengthUsername) {
+      // langsung potong text-nya biar gak nambah
+      _Usernamecontroller.text = value.substring(0, _maxlengthUsername);
+      _Usernamecontroller.selection = TextSelection.fromPosition(
+        TextPosition(offset: _Usernamecontroller.text.length),
+      );
+
+      // munculin popup error
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: Text('Maksimum Karakter Terlewati'),
+          content: Text('Input tidak boleh lebih dari $_maxlengthUsername karakter.'),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: Text('Oke'),
+            ),
+          ],
+        ),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +112,8 @@ class LoginPageState extends State<LoginPage> {
                       "Login",
                       style: TextStyle(
                         fontSize: 37.0,
-                        fontWeight: FontWeight.w700, letterSpacing: 2,
+                        fontWeight: FontWeight.w700,
+                        letterSpacing: 2,
                       ),
                     ),
                   ),
@@ -81,6 +137,8 @@ class LoginPageState extends State<LoginPage> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
                             TextFormField(
+                              controller: _Passwordcontroller,
+                              onChanged: _checkLengthUsername,
                               style: TextStyle(fontSize: 16.0),
                               decoration: InputDecoration(
                                 contentPadding: const EdgeInsets.symmetric(
@@ -98,6 +156,8 @@ class LoginPageState extends State<LoginPage> {
                               ),
                             ),
                             TextFormField(
+                              controller: _Usernamecontroller,
+                              onChanged: _checkLengthPassword,
                               style: TextStyle(fontSize: 16.0),
                               decoration: InputDecoration(
                                 contentPadding: const EdgeInsets.symmetric(
@@ -134,15 +194,24 @@ class LoginPageState extends State<LoginPage> {
                               ),
                             ],
                           ),
-                          child: MouseRegion(cursor: SystemMouseCursors.click, child: GestureDetector(onTap: () {
-                             Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomePage()));
-                          },
-                          child: Icon(
-                            Icons.arrow_forward,
-                            size: 40.0,
-                            color: Colors.white,
+                          child: MouseRegion(
+                            cursor: SystemMouseCursors.click,
+                            child: GestureDetector(
+                              onTap: () {
+                                Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => HomePage(),
+                                  ),
+                                );
+                              },
+                              child: Icon(
+                                Icons.arrow_forward,
+                                size: 40.0,
+                                color: Colors.white,
+                              ),
+                            ),
                           ),
-                          ),),
                         ),
                       ),
                     ],
@@ -153,43 +222,46 @@ class LoginPageState extends State<LoginPage> {
                       vertical: 25.0,
                       horizontal: 30.0,
                     ),
-                    child: MouseRegion(cursor: SystemMouseCursors.click, child: GestureDetector(onTap: _launchWhatsApp,
-                    child: Text(
-                      "Forgot?",
-                      style: TextStyle(
-                        fontSize: 18.0,
-                        color: Colors.grey[400],
-                        fontWeight: FontWeight.w700,
-                        letterSpacing: 2,
+                    child: MouseRegion(
+                      cursor: SystemMouseCursors.click,
+                      child: GestureDetector(
+                        onTap: _launchWhatsApp,
+                        child: Text(
+                          "Forgot?",
+                          style: TextStyle(
+                            fontSize: 18.0,
+                            color: Colors.grey[400],
+                            fontWeight: FontWeight.w700,
+                            letterSpacing: 2,
+                          ),
+                        ),
                       ),
-                    )), ),
-                    
+                    ),
                   ),
-                 Container(
-                  alignment: Alignment.centerLeft,
-                  padding: EdgeInsets.only(left: 25.0, top: 30.0),
-  child: MouseRegion(
-    cursor: SystemMouseCursors.click,
-    child: GestureDetector(
-      onTap: () {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => Register()),
-        );
-      },
-      child: Text(
-        "Register",
-        style: TextStyle(
-          fontSize: 18.0,
-          color: Colors.deepOrangeAccent,
-          fontWeight: FontWeight.w700,
-          letterSpacing: 2,
-        ),
-      ),
-    ),
-  ),
-)
-
+                  Container(
+                    alignment: Alignment.centerLeft,
+                    padding: EdgeInsets.only(left: 25.0, top: 30.0),
+                    child: MouseRegion(
+                      cursor: SystemMouseCursors.click,
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(builder: (context) => Register()),
+                          );
+                        },
+                        child: Text(
+                          "Register",
+                          style: TextStyle(
+                            fontSize: 18.0,
+                            color: Colors.deepOrangeAccent,
+                            fontWeight: FontWeight.w700,
+                            letterSpacing: 2,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),

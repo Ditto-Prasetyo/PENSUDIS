@@ -236,15 +236,17 @@ class _SplashScreenState extends State<SplashScreen>
                               mainAxisSize: MainAxisSize
                                   .min, // Agar row nggak melebar lebih dari yang diperlukan
                               children: [
+                                Container(padding: EdgeInsets.only(left: 0.0)),
                                 Text(
                                   'Get Started',
                                   style: TextStyle(
                                     fontSize: 15,
-                                    fontWeight: FontWeight.bold,
+                                    fontWeight: FontWeight.bold, color: Colors.white
                                   ),
                                 ),
+                                Padding(padding: EdgeInsetsGeometry.only(right: 5.0)),
                                 SizedBox(
-                                  width: 45,
+                                  width: 55,
                                   height: 40,
                                   child: Stack(
                                     alignment: Alignment.center,
@@ -254,9 +256,9 @@ class _SplashScreenState extends State<SplashScreen>
                                         top: _arrowTop,
                                         left: _arrowLeft,
                                         child: Icon(
-                                          Icons.arrow_right_rounded,
+                                          Icons.arrow_forward,
                                           size: 36,
-                                          color: Colors.black,
+                                          color: Colors.white,
                                         ),
                                       ),
                                     ],

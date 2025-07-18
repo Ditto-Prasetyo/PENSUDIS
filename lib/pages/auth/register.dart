@@ -29,14 +29,18 @@ class Register extends StatelessWidget {
                     padding: const EdgeInsets.only(
                       right: 30.0,
                       top: 100.0,
-                      bottom: 50.0
+                      bottom: 50.0,
                     ),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(bottom: 55.0),
                     child: Text(
                       "Register",
-                      style: TextStyle(fontSize: 37.0, fontWeight: FontWeight.w700, letterSpacing: 2),
+                      style: TextStyle(
+                        fontSize: 37.0,
+                        fontWeight: FontWeight.w700,
+                        letterSpacing: 2,
+                      ),
                     ),
                   ),
                   Stack(
@@ -48,10 +52,7 @@ class Register extends StatelessWidget {
                         decoration: BoxDecoration(
                           color: Colors.white,
                           boxShadow: [
-                            BoxShadow(
-                              color: Colors.black26,
-                              blurRadius: 20.0,
-                            )
+                            BoxShadow(color: Colors.black26, blurRadius: 20.0),
                           ],
                           borderRadius: BorderRadius.only(
                             topRight: Radius.circular(90.0),
@@ -67,19 +68,14 @@ class Register extends StatelessWidget {
                                 contentPadding: const EdgeInsets.symmetric(
                                   vertical: 15.0,
                                 ),
-                                icon: Icon(
-                                  Icons.person_outline,
-                                  size: 24.0,
-                                ),
+                                icon: Icon(Icons.person_outline, size: 24.0),
                                 hintText: "Username",
                                 border: InputBorder.none,
                               ),
                             ),
                             Container(
                               decoration: BoxDecoration(
-                                border: Border.all(
-                                  color: Colors.grey,
-                                ),
+                                border: Border.all(color: Colors.grey),
                               ),
                             ),
                             TextFormField(
@@ -88,19 +84,14 @@ class Register extends StatelessWidget {
                                 contentPadding: const EdgeInsets.symmetric(
                                   vertical: 15.0,
                                 ),
-                                icon: Icon(
-                                  Icons.lock_outline,
-                                  size: 24.0,
-                                ),
+                                icon: Icon(Icons.lock_outline, size: 24.0),
                                 hintText: "Password",
                                 border: InputBorder.none,
                               ),
                             ),
                             Container(
                               decoration: BoxDecoration(
-                                border: Border.all(
-                                  color: Colors.grey,
-                                ),
+                                border: Border.all(color: Colors.grey),
                               ),
                             ),
                             TextFormField(
@@ -109,10 +100,7 @@ class Register extends StatelessWidget {
                                 contentPadding: const EdgeInsets.symmetric(
                                   vertical: 15.0,
                                 ),
-                                icon: Icon(
-                                  Icons.alternate_email,
-                                  size: 26.0,
-                                ),
+                                icon: Icon(Icons.alternate_email, size: 26.0),
                                 hintText: "Email",
                                 border: InputBorder.none,
                               ),
@@ -139,18 +127,27 @@ class Register extends StatelessWidget {
                               BoxShadow(
                                 color: Colors.black26,
                                 blurRadius: 10.0,
-                              )
+                              ),
                             ],
                           ),
-                          child: MouseRegion(cursor: SystemMouseCursors.click, child: GestureDetector(
-                            onTap: () {
-                              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => RegisterCred()));
-                            },
-                            child: Icon(
-                            Icons.arrow_upward,    
-                            size: 40.0,
-                            color: Colors.white,
-                          ),),),
+                          child: MouseRegion(
+                            cursor: SystemMouseCursors.click,
+                            child: GestureDetector(
+                              onTap: () {
+                                Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => RegisterCred(),
+                                  ),
+                                );
+                              },
+                              child: Icon(
+                                Icons.arrow_upward,
+                                size: 40.0,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
                         ),
                       ),
                       Container(
@@ -161,11 +158,21 @@ class Register extends StatelessWidget {
                           child: GestureDetector(
                             onTap: () {
                               Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => LoginPage()),
-        );
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => LoginPage(),
+                                ),
+                              );
                             },
-                            child: Text("Login", style: TextStyle(fontSize: 18.0, color: Colors.deepOrangeAccent, fontWeight: FontWeight.w700, letterSpacing: 2 ),),
+                            child: Text(
+                              "Login",
+                              style: TextStyle(
+                                fontSize: 18.0,
+                                color: Colors.deepOrangeAccent,
+                                fontWeight: FontWeight.w700,
+                                letterSpacing: 2,
+                              ),
+                            ),
                           ),
                         ),
                       ),

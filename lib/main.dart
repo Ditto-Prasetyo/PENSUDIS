@@ -1,4 +1,3 @@
-import 'package:bintar_sepuh/pages/auth/login.dart';
 import 'package:bintar_sepuh/pages/splashs/splashscreen_before_page.dart';
 import 'package:flutter/foundation.dart'; 
 import 'package:flutter/material.dart';

@@ -29,14 +29,18 @@ class RegisterCred extends StatelessWidget {
                     padding: const EdgeInsets.only(
                       right: 30.0,
                       top: 100.0,
-                      bottom: 50.0
+                      bottom: 50.0,
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(bottom: 55.0, left: 35.0),
+                    padding: const EdgeInsets.only(bottom: 55.0, left: 50.0),
                     child: Text(
                       "Register Cred",
-                      style: TextStyle(fontSize: 37.0, fontWeight: FontWeight.w700, letterSpacing: 2),
+                      style: TextStyle(
+                        fontSize: 34.0,
+                        fontWeight: FontWeight.w700,
+                        letterSpacing: 2,
+                      ),
                     ),
                   ),
                   Stack(
@@ -48,10 +52,7 @@ class RegisterCred extends StatelessWidget {
                         decoration: BoxDecoration(
                           color: Colors.white,
                           boxShadow: [
-                            BoxShadow(
-                              color: Colors.black26,
-                              blurRadius: 20.0,
-                            )
+                            BoxShadow(color: Colors.black26, blurRadius: 20.0),
                           ],
                           borderRadius: BorderRadius.only(
                             topRight: Radius.circular(90.0),
@@ -77,9 +78,7 @@ class RegisterCred extends StatelessWidget {
                             ),
                             Container(
                               decoration: BoxDecoration(
-                                border: Border.all(
-                                  color: Colors.grey,
-                                ),
+                                border: Border.all(color: Colors.grey),
                               ),
                             ),
                             TextFormField(
@@ -88,31 +87,24 @@ class RegisterCred extends StatelessWidget {
                                 contentPadding: const EdgeInsets.symmetric(
                                   vertical: 15.0,
                                 ),
-                                icon: Icon(
-                                  Icons.phone_android,
-                                  size: 24.0,
-                                ),
+                                icon: Icon(Icons.phone_android, size: 24.0),
                                 hintText: "Phone Number",
                                 border: InputBorder.none,
                               ),
                             ),
                             Container(
                               decoration: BoxDecoration(
-                                border: Border.all(
-                                  color: Colors.grey,
-                                ),
+                                border: Border.all(color: Colors.grey),
                               ),
                             ),
                             TextFormField(
                               style: TextStyle(fontSize: 16.0),
                               decoration: InputDecoration(
                                 contentPadding: const EdgeInsets.symmetric(
-                                  vertical: 15.0, horizontal: -2.0,
+                                  vertical: 15.0,
+                                  horizontal: -2.0,
                                 ),
-                                icon: Icon(
-                                  Icons.home,
-                                  size: 26.0,
-                                ),
+                                icon: Icon(Icons.home, size: 26.0),
                                 hintText: "Address",
                                 border: InputBorder.none,
                               ),
@@ -139,21 +131,27 @@ class RegisterCred extends StatelessWidget {
                               BoxShadow(
                                 color: Colors.black26,
                                 blurRadius: 10.0,
-                              )
+                              ),
                             ],
                           ),
-                          child: MouseRegion(cursor: SystemMouseCursors.click, child: GestureDetector(onTap: () {
-                            Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => LoginPage()),
-        );
-                          },
-                          child: Icon(
-                            Icons.arrow_upward,
-                            size: 40.0,
-                            color: Colors.white,
+                          child: MouseRegion(
+                            cursor: SystemMouseCursors.click,
+                            child: GestureDetector(
+                              onTap: () {
+                                Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => LoginPage(),
+                                  ),
+                                );
+                              },
+                              child: Icon(
+                                Icons.check,
+                                size: 40.0,
+                                color: Colors.white,
+                              ),
+                            ),
                           ),
-                          ),),
                         ),
                       ),
                       Container(
@@ -164,11 +162,21 @@ class RegisterCred extends StatelessWidget {
                           child: GestureDetector(
                             onTap: () {
                               Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => Register()),
-        );
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => Register(),
+                                ),
+                              );
                             },
-                            child: Text("Back", style: TextStyle(fontSize: 18.0, color: Colors.deepOrangeAccent, fontWeight: FontWeight.w700, letterSpacing: 2 ),),
+                            child: Text(
+                              "Back",
+                              style: TextStyle(
+                                fontSize: 18.0,
+                                color: Colors.deepOrangeAccent,
+                                fontWeight: FontWeight.w700,
+                                letterSpacing: 2,
+                              ),
+                            ),
                           ),
                         ),
                       ),
